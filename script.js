@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit")
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -43,6 +43,20 @@ function checkAnswer() {
 
 function calculateRightAnswer() {
 
+    // Gets the operands (the numbers) and the operator (plus, minus sign etc.)
+    // directly from the DOM
+
+    let operand1 = parseInt(document.getElementById("operand1").innerText);
+    let operand2 = parseInt(document.getElementById("operand2").innerText);
+    let operator = document.getElementById("operator").innerText;
+
+    if (operator === "+") { // This is the addition game
+        return [operand1 + operand2, "addition"]; // return an array containing the correct answer and game type
+    }
+    else {
+        alert(`Unimplemented operator: ${operator}`);
+        throw `Unimplemented operator ${operator}, aborting`;
+    }
 }
 
 function incrementScore() {
